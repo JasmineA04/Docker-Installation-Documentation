@@ -1,12 +1,14 @@
 # Docker-Installation-Documentation
 ## Installation of Docker
+- For the installation of Docker, I used the following url to guide in installing Docker. 
+  - https://docs.docker.com/engine/install/ubuntu/
 ### Uninstall old versions
 - Uninstall all unofficial Docker packages, which may conflict with the official packages provided by Docker.
 ````
 sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
 ````
 ### Install using the apt repository
-1. Set up DockerS **apt** repository:
+1. Set up Docker **apt** repository:
 ````
 # Add Docker's official GPG key:
 sudo apt update
@@ -47,19 +49,19 @@ sudo docker run hello-word
 ## Install Docker Compose
 ````
 sudo apt update
-sudo apt install docker-compose-plugin
+sudo apt install docker-compose-plugin # Install Docker Compose
 docker compose version # Test
 ````
 ## Choose your own adventure: GitLab
-- If followed the instruction from https://docs.gitlab.com/install/docker/installation/ to complete the installation of GitLab.
+- If followed the instruction from https://docs.gitlab.com/install/docker/installation/ to complete the installation of GitLab using Docker Compose. 
 - Installing GitLab
 ````
-sudo mkdir -p /srv/gitlab/config /srv/gitlab/logs /srv/gitlab/data
-cd /srv/gitlab
-sudo nano docker-compose.yml
-sudo docker compose up -d # Install gitlab
+sudo mkdir -p /srv/gitlab/config /srv/gitlab/logs /srv/gitlab/data # Creates the Directories
+cd /srv/gitlab # Change to the GitLab directory
+sudo nano docker-compose.yml # Below shows what was used
+sudo docker compose up -d # Install GitLab
 ````
-- In docker-compose.yml
+- In docker-compose.yml use
 ````
 version: '3.8'
 services:
@@ -69,7 +71,7 @@ services:
     hostname: 'gitlab.example.com'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://gitlab.example.com'
+        external_url 'http://localhost'
     ports:
       - '80:80'
       - '443:443'
@@ -79,6 +81,7 @@ services:
       - './logs:/var/log/gitlab'
       - './data:/var/opt/gitlab'
 ````
+
 
 ## Problem
 - When trying to exectue the command of writing docker-compose.yml an error was showing whenever I was trying to execte the command. The error was that I was writing it on my user account and not in root. I added **sudo** on the command and that resolved it.  
