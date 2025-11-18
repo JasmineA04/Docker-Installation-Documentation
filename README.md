@@ -60,6 +60,7 @@ sudo mkdir -p /srv/gitlab/config /srv/gitlab/logs /srv/gitlab/data # Creates the
 cd /srv/gitlab # Change to the GitLab directory
 sudo nano docker-compose.yml # Below shows what was used
 sudo docker compose up -d # Install GitLab
+sudo docker ps # Check the container
 ````
 - In docker-compose.yml use
 ````
@@ -67,6 +68,7 @@ version: '3.8'
 services:
   web:
     image: 'gitlab/gitlab-ee:latest'
+    container_nameL my-gitlab
     restart: always
     hostname: 'gitlab.example.com'
     environment:
