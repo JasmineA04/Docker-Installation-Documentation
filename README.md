@@ -70,7 +70,7 @@ services:
     image: 'gitlab/gitlab-ee:latest'
     container_nameL my-gitlab
     restart: always
-    hostname: 'gitlab.example.com'
+    hostname: ''
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://localhost'
@@ -83,6 +83,13 @@ services:
       - './logs:/var/log/gitlab'
       - './data:/var/opt/gitlab'
 ````
+## Docker Picture
+- In the document attached to the respository has the picture of sucessfully loging into the GitLab directory and succesfully running it.
+- Giving out the following information; Container ID, Image, Command, when it was Created, Status, If it is Running, Ports, Port mapping and its Name
+
+## Logging into the the GitLab browser:
+- Using the command of **ip addr** verify the host IP
+- Go into the web browswer and type **http://localhost** #http or https depending on the port
 
 
 ## Problem
