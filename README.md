@@ -55,29 +55,30 @@ docker compose version # Test
 - Installing GitLab
 ````
 sudo mkdir -p /srv/gitlab/config /srv/gitlab/logs /srv/gitlab/data
-cd /srv.gitlab
+cd /srv/gitlab
 sudo nano docker-compose.yml
+sudo docker compose up -d # Install gitlab
 ````
 - In docker-compose.yml
 ````
+version: '3.8'
 services:
-  gitlab:
-    image: gitlab/gitlab-ee:<version>-ee.0
-    container_name: gitlab
+  web:
+    image: 'gitlab/gitlab-ee:latest'
     restart: always
     hostname: 'gitlab.example.com'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        # Add any other gitlab.rb configuration here, each on its own line
-        external_url 'https://gitlab.example.com'
+        external_url 'http://gitlab.example.com'
     ports:
       - '80:80'
       - '443:443'
       - '22:22'
     volumes:
-      - '$GITLAB_HOME/config:/etc/gitlab'
-      - '$GITLAB_HOME/logs:/var/log/gitlab'
-      - '$GITLAB_HOME/data:/var/opt/gitlab'
-    shm_size: '256m'
+      - './config:/etc/gitlab'
+      - './logs:/var/log/gitlab'
+      - './data:/var/opt/gitlab'
 ````
 
+## Problem
+- When trying to exectue the command of writing docker-compose.yml an error was showing whenever I was trying to execte the command. The error was that I was writing it on my user account and not in root. I added **sudo** on the command and that resolved it.  
